@@ -1,5 +1,5 @@
 -- Create table for Question model
-CREATE TABLE question (
+CREATE TABLE IF NOT EXISTS question (
                           id SERIAL PRIMARY KEY,
                           question_title VARCHAR(255),
                           option1 VARCHAR(255),
