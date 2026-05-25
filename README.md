@@ -99,7 +99,7 @@ A production-grade scalable Quiz Application built using **Spring Boot Microserv
 
 | Layer | Technology |
 |---|---|
-| Backend | Java 21 + Spring Boot 3 |
+| Backend | Java 21 + Spring Boot 4 |
 | Frontend | React + Vite |
 | Security | Spring Security + JWT |
 | API Gateway | Spring Cloud Gateway |
