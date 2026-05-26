@@ -20,15 +20,30 @@ public class QuestionService {
     }
 
     public ResponseEntity<List<Question>> getAllQuestions() {
-        return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
-        return new ResponseEntity<>(questionDao.findByCategoryIgnoreCase(category), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(questionDao.findByCategoryIgnoreCase(category), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Question> addQuestion(Question question) {
-        return new ResponseEntity<>(questionDao.save(question), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(questionDao.save(question), HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     public void deleteQuestion(Question question) {
@@ -36,6 +51,11 @@ public class QuestionService {
     }
 
     public ResponseEntity<Question> updateQuestion(Question question) {
-            return new ResponseEntity<>(questionDao.save(question), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(questionDao.save(question), HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
