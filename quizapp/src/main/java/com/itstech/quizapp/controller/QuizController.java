@@ -1,12 +1,12 @@
 package com.itstech.quizapp.controller;
 
+import com.itstech.quizapp.model.dto.QuestionDto;
 import com.itstech.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("quiz")
@@ -22,5 +22,17 @@ public class QuizController {
     @PostMapping("create")
     public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title) {
         return quizService.createQuiz(category, numQ, title);
+    }
+
+    // FETCHING THE QUIZ BY ID
+    /*@GetMapping("getQuiz/{id}")
+    public Optional<Quiz> getQuizById(@PathVariable int id) {
+        return quizService.getQuizById(id);
+    }*/
+
+    // FETCHING THE QUIZ-QUESTIONS BY ID
+    @GetMapping("getQuiz/{id}")
+    public ResponseEntity<List<QuestionDto>> getQuizQuestions(@PathVariable Integer id) {
+        return quizService.getQuizQuestions(id);
     }
 }
