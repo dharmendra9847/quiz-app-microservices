@@ -46,8 +46,9 @@ public class QuestionService {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    public void deleteQuestion(Question question) {
-        questionDao.delete(question);
+    public String deleteQuestion(int id) {
+        questionDao.deleteById(id);
+        return "Question has been deleted";
     }
 
     public ResponseEntity<Question> updateQuestion(Question question) {
