@@ -3,6 +3,8 @@ package com.itstech.quizapp.service;
 import com.itstech.quizapp.dao.QuestionDao;
 import com.itstech.quizapp.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +19,23 @@ public class QuestionService {
         this.questionDao = questionDao;
     }
 
-    public List<Question> getAllQuestions() {
-        return questionDao.findAll();
+    public ResponseEntity<List<Question>> getAllQuestions() {
+        return new ResponseEntity<>(questionDao.findAll(), HttpStatus.OK);
     }
 
-    public List<Question> getQuestionsByCategory(String category) {
-        return questionDao.findByCategoryIgnoreCase(category);
+    public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+        return new ResponseEntity<>(questionDao.findByCategoryIgnoreCase(category), HttpStatus.OK);
     }
 
-    public Question addQuestion(Question question) {
-        return questionDao.save(question);
+    public ResponseEntity<Question> addQuestion(Question question) {
+        return new ResponseEntity<>(questionDao.save(question), HttpStatus.OK);
+    }
+
+    public void deleteQuestion(Question question) {
+        questionDao.delete(question);
+    }
+
+    public ResponseEntity<Question> updateQuestion(Question question) {
+            return new ResponseEntity<>(questionDao.save(question), HttpStatus.OK);
     }
 }
