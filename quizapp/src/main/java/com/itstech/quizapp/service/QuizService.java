@@ -5,6 +5,7 @@ import com.itstech.quizapp.dao.QuizDao;
 import com.itstech.quizapp.model.Question;
 import com.itstech.quizapp.model.Quiz;
 import com.itstech.quizapp.model.dto.QuestionDto;
+import com.itstech.quizapp.model.dto.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,30 @@ public class QuizService {
             questionsForUser.add(dto);
         }
         return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> calculateResult(Integer id, List<ResponseDto> responses) {
+
+        Optional<Quiz> quizOptional = quizDao.findById(id);
+        if (quizOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Quiz quiz = quizOptional.get();
+        List<Question> questions = quiz.getQuestions();
+
+        int correctAnswer = 0;
+        
+        for (ResponseDto response : responses) {
+            Question question = questionDao.findById(response.getId()).orElse(null);
+
+            if (question != null &&
+                    question.getRightAnswer().equalsIgnoreCase(response.getResponse())) {
+
+                correctAnswer++;
+            }
+        }
+        return new ResponseEntity<>(correctAnswer, HttpStatus.OK);
     }
 
     /*public Optional<Quiz> getQuizById(int id) {

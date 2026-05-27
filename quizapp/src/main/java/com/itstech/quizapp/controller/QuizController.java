@@ -1,5 +1,6 @@
 package com.itstech.quizapp.controller;
 
+import com.itstech.quizapp.model.dto.ResponseDto;
 import com.itstech.quizapp.model.dto.QuestionDto;
 import com.itstech.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,11 @@ public class QuizController {
     @GetMapping("getQuiz/{id}")
     public ResponseEntity<List<QuestionDto>> getQuizQuestions(@PathVariable Integer id) {
         return quizService.getQuizQuestions(id);
+    }
+
+    // CALCULATE RESULT AND SUBMIT THE RESPONSE
+    @PostMapping("submit/{id}")
+    public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestBody List<ResponseDto> responses) {
+        return quizService.calculateResult(id, responses);
     }
 }
