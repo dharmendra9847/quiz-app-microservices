@@ -27,7 +27,7 @@ public class QuizService {
         this.questionDao = questionDao;
     }
 
-    public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
+    public ResponseEntity<Integer> createQuiz(String category, int numQ, String title) {
 
         List<Question> question = questionDao.findRandomQuestionByCategoryIgnoreCase(category, numQ);
 
@@ -37,7 +37,7 @@ public class QuizService {
 
         quizDao.save(quiz);
 
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>(quiz.getId(), HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<QuestionDto>> getQuizQuestions(Integer id) {
@@ -71,11 +71,8 @@ public class QuizService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        Quiz quiz = quizOptional.get();
-        List<Question> questions = quiz.getQuestions();
-
         int correctAnswer = 0;
-        
+
         for (ResponseDto response : responses) {
             Question question = questionDao.findById(response.getId()).orElse(null);
 

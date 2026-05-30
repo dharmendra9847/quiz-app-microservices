@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("quiz")
+@CrossOrigin
 public class QuizController {
 
     private QuizService quizService;
@@ -21,7 +22,7 @@ public class QuizController {
     }
 
     @PostMapping("create")
-    public ResponseEntity<String> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title) {
+    public ResponseEntity<Integer> createQuiz(@RequestParam String category, @RequestParam int numQ, @RequestParam String title) {
         return quizService.createQuiz(category, numQ, title);
     }
 
