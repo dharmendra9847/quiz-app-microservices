@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="alien1" class="com.spring.myapp.alien.Alien">
+<!--        <constructor-arg name="age" value="22"/> &lt;!&ndash; constructor injection &ndash;&gt;-->
+<!--        <constructor-arg name="laptop" ref="laptop1"/> &lt;!&ndash; constructor injection by reference &ndash;&gt;-->
+
+<!--        <constructor-arg value="35"/> &lt;!&ndash; constructor injection &ndash;&gt;-->
+<!--        <constructor-arg ref="laptop1"/> &lt;!&ndash; constructor injection by reference &ndash;&gt;-->
+
+        <!--   By Type     -->
+<!--        <constructor-arg type="com.spring.myapp.laptop.Laptop" ref="laptop1"/>-->
+<!--        <constructor-arg type="int" value="35"/>-->
+
+        <constructor-arg name="laptop" ref="laptop1"/>
+        <constructor-arg name="age" value="35"/>
+        <constructor-arg name="salary" value="200000"/>
+
+        <!--   By index     -->
+<!--        <constructor-arg index="1" ref="laptop1"/>-->
+<!--        <constructor-arg index="0" value="35"/>-->
+<!--        <constructor-arg index="2" value="5000"/>-->
+
+    </bean>
+
+    <bean id="laptop1" class="com.spring.myapp.laptop.Laptop"/>
+</beans>

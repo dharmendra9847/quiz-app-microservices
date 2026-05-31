@@ -1,0 +1,12 @@
+package com.spring.myapp.laptop;
+
+public class Laptop {
+
+//    public Laptop() {
+//        System.out.println("Laptop Constructor");
+//    }
+
+    public void compile(){
+        System.out.println("Laptop compile");
+    }
+}

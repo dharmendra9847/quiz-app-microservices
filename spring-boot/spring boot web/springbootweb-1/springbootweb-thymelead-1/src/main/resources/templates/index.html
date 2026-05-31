@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- Fixed the namespace here -->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Standard Bootstrap (No need for th:href for CDNs, but added it correctly just in case) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Link to your custom style.css (Assuming it's in static/css/style.css) -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<div class="glass-card">
+    <h1>Welcome Home</h1>
+    <h3>Smart Calculator</h3>
+
+    <!-- th:action="@{/add}" ensures the context path is handled correctly -->
+    <form th:action="@{/add}" method="get">
+        <div class="form-group">
+            <label for="num1">First Number</label>
+            <input type="number" name="num1" id="num1" placeholder="e.g. 42" required>
+        </div>
+        <div class="form-group">
+            <label for="num2">Second Number</label>
+            <input type="number" name="num2" id="num2" placeholder="e.g. 10" required>
+        </div>
+        <button type="submit" class="btn-pro">Calculate Now</button>
+    </form>
+</div>
+
+<!-- Scripts at the bottom for better performance -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

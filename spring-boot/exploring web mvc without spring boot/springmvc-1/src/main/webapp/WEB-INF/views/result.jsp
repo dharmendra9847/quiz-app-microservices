@@ -1,0 +1,128 @@
+<%@page language="java" isELIgnored="false" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #23a6d5, #23d5ab, #ee7752, #e73c7e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .result-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            max-width: 450px;
+            width: 90%;
+            animation: slideUp 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        /* Success Icon */
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: #23d5ab;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 10px 20px rgba(35, 213, 171, 0.3);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        /* The Result Highlight */
+        .result-value {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #23a6d5, #e73c7e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            animation: scaleIn 0.5s ease-out 0.5s both;
+        }
+
+        .btn-back {
+            display: inline-block;
+            text-decoration: none;
+            color: #666;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #eee;
+        }
+
+        .btn-back:hover {
+            background: #f8f8f8;
+            color: #23a6d5;
+            transform: translateX(-5px);
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            70% { transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="result-container">
+        <div class="icon-circle">
+            <span class="glyphicon glyphicon-ok"></span>
+        </div>
+        <h1>Calculation Complete</h1>
+        <p>Your Result is</p>
+        <div class="result-value">${result}</div>
+        <a href="index" class="btn-back">&larr; Calculate Again</a>
+    </div>
+</body>
+</html>
