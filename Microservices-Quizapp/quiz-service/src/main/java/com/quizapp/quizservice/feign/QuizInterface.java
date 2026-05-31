@@ -15,15 +15,15 @@ import java.util.List;
 public interface QuizInterface {
 
     // generate
-    @GetMapping("generate")
+    @GetMapping("question/generate")
     public ResponseEntity<List<Integer>> generateQuestionsForQuiz(@RequestParam String categoryName, @RequestParam Integer numQuestions);
 
     // getQuestion (through questionId)
-    @PostMapping("getQuestions")
+    @PostMapping("question/getQuestions")
     public ResponseEntity<List<QuestionDto>> getQuestionsFromId(@RequestBody List<Integer> questionIds);
 
     // getScore
-    @PostMapping("getScore")
+    @PostMapping("question/getScore")
     public ResponseEntity<Integer> getScore(@RequestBody List<ResponseDto> responseDtos);
 
 }
