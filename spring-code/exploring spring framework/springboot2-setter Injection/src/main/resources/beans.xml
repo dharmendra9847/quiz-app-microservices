@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="alien1" class="com.spring.myapp.alien.Alien">
+        <property name="age" value="30"></property> <!-- setter injection -->
+        <property name="laptop" ref="laptop1"></property> <!-- reference injection -->
+    </bean>
+
+    <bean id="laptop1" class="com.spring.myapp.laptop.Laptop"></bean>
+</beans>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Result</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Custom CSS (Ensure this file is in src/main/resources/static/add.css) -->
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+</head>
+<body>
+<div class="result-container">
+    <div class="icon-circle">
+        <!-- This icon comes from Bootstrap -->
+        <span class="glyphicon glyphicon-ok"></span>
+    </div>
+    <h1>Calculation Complete</h1>
+    <p>Your Result is</p>
+
+    <!-- THYMELEAF FIX: th:text is required to show the variable -->
+    <div class="result-value" th:text="${result}">0</div>
+
+    <!-- THYMELEAF FIX: th:href="@{/}" goes to your home mapping -->
+    <a th:href="@{/index}" class="btn-back">&larr; Calculate Again</a>
+</div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
