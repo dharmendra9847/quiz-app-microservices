@@ -39,46 +39,16 @@ public class QuizService {
     }
 
     public ResponseEntity<List<QuestionDto>> getQuizQuestions(Integer id) {
-
         Optional<Quiz> quizOptional = quizDao.findById(id);
-
         if (quizOptional.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-//        List<Question> questionsFromDB = quizOptional.get().getQuestions();
-        List<QuestionDto> questionsForUser =  new ArrayList<>();
-
-//        for (Question question : questionsFromDB) {
-//            QuestionDto dto = new QuestionDto();
-//            dto.setId(question.getId());
-//            dto.setQuestionTitle(question.getQuestionTitle());
-//            dto.setOption1(question.getOption1());
-//            dto.setOption2(question.getOption2());
-//            dto.setOption3(question.getOption3());
-//            dto.setOption4(question.getOption4());
-//            questionsForUser.add(dto);
-//        }
-        return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
+        List<Integer> questionIds = quizOptional.get().getQuestionIds();
+        return quizInterface.getQuestionsFromId(questionIds);
     }
 
     public ResponseEntity<Integer> calculateResult(Integer id, List<ResponseDto> responses) {
-
-        Optional<Quiz> quizOptional = quizDao.findById(id);
-        if (quizOptional.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        int correctAnswer = 0;
-
-        for (ResponseDto response : responses) {
-            Quiz question = quizDao.findById(response.getId()).orElse(null);
-
-            if (question != null && question.getQuestionIds() != null ) {
-                correctAnswer++;
-            }
-        }
-        return new ResponseEntity<>(correctAnswer, HttpStatus.OK);
+        return quizInterface.getScore(responses);
     }
 
 }
