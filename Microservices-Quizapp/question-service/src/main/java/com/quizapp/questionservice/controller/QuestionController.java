@@ -5,6 +5,7 @@ import com.quizapp.questionservice.model.dto.QuestionDto;
 import com.quizapp.questionservice.model.dto.ResponseDto;
 import com.quizapp.questionservice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,12 @@ import java.util.List;
 public class QuestionController {
 
     private QuestionService questionService;
+    private Environment environment;
 
     @Autowired
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, Environment environment) {
         this.questionService = questionService;
+        this.environment = environment;
     }
 
     @GetMapping("allQuestions")
@@ -49,6 +52,7 @@ public class QuestionController {
     // generate
     @GetMapping("generate")
     public ResponseEntity<List<Integer>> generateQuestionsForQuiz(@RequestParam String categoryName, @RequestParam Integer numQuestions) {
+        System.out.println(environment.getProperty("local.server.port"));
         return questionService.generateQuestionsForQuiz(categoryName, numQuestions);
     }
 

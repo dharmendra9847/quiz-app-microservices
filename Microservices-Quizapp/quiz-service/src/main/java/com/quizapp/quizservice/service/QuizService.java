@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +29,16 @@ public class QuizService {
 
         List<Integer> questions = quizInterface.generateQuestionsForQuiz(category, numQ).getBody();
 
+        if (questions == null || questions.isEmpty()) {
+            return new ResponseEntity<>("No questions found", HttpStatus.BAD_REQUEST);
+        }
+
         Quiz quiz = new Quiz();
         quiz.setTitle(title);
         quiz.setQuestionIds(questions);
-        quizDao.save(quiz);
+        Quiz savedQuiz  = quizDao.save(quiz);
 
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        return new ResponseEntity<>(String.valueOf(savedQuiz.getId()), HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<QuestionDto>> getQuizQuestions(Integer id) {
