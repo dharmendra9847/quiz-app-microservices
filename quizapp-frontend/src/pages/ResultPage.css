@@ -1,0 +1,141 @@
+.result-page {
+  min-height: 100vh;
+  padding: 80px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+.result-content {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 20px;
+}
+
+/* Confetti */
+.result-confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 3s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Score Circle */
+.score-circle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.score-grade-emoji {
+  position: absolute;
+  top: -20px;
+  font-size: 2.5rem;
+  animation: float 3s ease-in-out infinite;
+  z-index: 1;
+}
+.score-ring { filter: drop-shadow(0 0 20px rgba(124,106,247,0.3)); }
+
+/* Grade Banner */
+.grade-banner { text-align: center; }
+.grade-banner__label {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--grade-color);
+  margin-bottom: 10px;
+  text-shadow: 0 0 40px var(--grade-color);
+}
+.grade-banner__msg { color: var(--text-secondary); font-size: 1rem; }
+
+/* Stats */
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+.result-stat {
+  padding: 20px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all var(--transition-med);
+  border-top: 3px solid var(--stat-color);
+}
+.result-stat:hover { transform: translateY(-4px); }
+.result-stat__icon { font-size: 1.4rem; }
+.result-stat__value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--stat-color);
+}
+.result-stat__label { font-size: 0.73rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+.result-quiz-title {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+.result-quiz-title strong { color: var(--text-secondary); }
+
+/* Performance Bar */
+.performance-bar {
+  width: 100%;
+  padding: 28px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.performance-bar__title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; }
+.perf-bar__track {
+  height: 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.perf-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 0 0 10px currentColor;
+}
+.perf-bar__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.perf-bar__markers {
+  position: relative;
+  height: 28px;
+  margin-top: -4px;
+}
+.perf-marker {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px;
+}
+.perf-marker__line {
+  width: 1px; height: 10px;
+  background: var(--border-subtle);
+}
+.perf-marker__label { font-size: 0.65rem; color: var(--text-muted); white-space: nowrap; }
+
+/* Actions */
+.result-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .result-stats { grid-template-columns: repeat(2, 1fr); }
+  .result-actions { flex-direction: column; align-items: stretch; }
+  .result-actions .btn { justify-content: center; }
+}
