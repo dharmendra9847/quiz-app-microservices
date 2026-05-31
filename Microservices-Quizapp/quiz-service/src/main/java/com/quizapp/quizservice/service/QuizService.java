@@ -1,6 +1,7 @@
 package com.quizapp.quizservice.service;
 
 import com.quizapp.quizservice.dao.QuizDao;
+import com.quizapp.quizservice.feign.QuizInterface;
 import com.quizapp.quizservice.model.Quiz;
 import com.quizapp.quizservice.model.dto.QuestionDto;
 import com.quizapp.quizservice.model.dto.ResponseDto;
@@ -17,31 +18,23 @@ import java.util.Optional;
 public class QuizService {
 
     private QuizDao quizDao;
-//    private QuestionDao questionDao;
-
-//    @Autowired
-//    public void setQuizDao(QuizDao quizDao, QuestionDao questionDao) {
-//        this.quizDao = quizDao;
-//        this.questionDao = questionDao;
-//    }
-
+    private QuizInterface quizInterface;
 
     @Autowired
-    public QuizService(QuizDao quizDao) {
+    public QuizService(QuizDao quizDao, QuizInterface quizInterface) {
         this.quizDao = quizDao;
+        this.quizInterface = quizInterface;
     }
 
     public ResponseEntity<String> createQuiz(String category, int numQ, String title) {
 
-//        List<Integer> question = ; // call to generate the url --> RestTemplate http://localhost:8081/question/generate
-//
-//        Quiz quiz = new Quiz();
-//        quiz.setTitle(title);
-//        quiz.setQuestions(question);
-//
-//        quizDao.save(quiz);
+        List<Integer> questions = quizInterface.generateQuestionsForQuiz(category, numQ).getBody();
 
-//        return new ResponseEntity<>(quiz.getId(), HttpStatus.CREATED);
+        Quiz quiz = new Quiz();
+        quiz.setTitle(title);
+        quiz.setQuestionIds(questions);
+        quizDao.save(quiz);
+
         return new ResponseEntity<>("success", HttpStatus.CREATED);
     }
 
@@ -81,7 +74,7 @@ public class QuizService {
         for (ResponseDto response : responses) {
             Quiz question = quizDao.findById(response.getId()).orElse(null);
 
-            if (question != null && question.getQuestions() != null ) {
+            if (question != null && question.getQuestionIds() != null ) {
                 correctAnswer++;
             }
         }
